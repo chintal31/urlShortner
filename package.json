@@ -24,7 +24,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
     "build": "babel -d ./build ./src",
-    "start": "node ./build/server.js"
+    "start": "node ./build/server.js",
+    "heroku-postbuild": "cd urlShortnerReact && npm install && npm run build"
   },
   "repository": {
     "type": "git",
