@@ -33,7 +33,6 @@ export const addUrl = async (newUrl) => {
     }
     await hsetAsync("urls", newUrl, JSON.stringify(urlProp));
     let urls = await hgetAllAsync("urls");
-    console.log("URLS ", urls);
     return urlProp;
   } catch (error) {
     console.log(`Error while adding url: ${error}`);

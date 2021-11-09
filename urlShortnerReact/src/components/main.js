@@ -29,16 +29,12 @@ export default function Main() {
     if (res.success) {
       displayStats();
     } else {
-      console.log(res.error);
       setShortUrlFailed(res.error);
     }
   };
 
   return (
-    <Box
-      // maxWidth="sm"
-      sx={{ marginLeft: "auto", width: "60%", marginRight: "auto" }}
-    >
+    <Box sx={{ marginLeft: "auto", width: "60%", marginRight: "auto" }}>
       {!viewStats ? (
         <Form
           onSubmit={handleSubmit}
