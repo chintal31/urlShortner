@@ -1,4 +1,7 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import "./load_env";
+import path from "path";
 import express from "express";
 import routes from "./routes";
 import cors from "cors";
@@ -14,7 +17,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "../urlShortnerReact/build")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../my-app/urlShortnerReact/index.html"));
+  res.sendFile(path.join(__dirname, "../urlShortnerReact/index.html"));
 });
 
 //App Routes
