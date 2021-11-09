@@ -14,14 +14,20 @@ export default function Stats(props) {
   }
   return (
     <React.Fragment>
+      <Button onClick={handleBack} variant="contained" sx={{ mb: 3 }}>
+        Back
+      </Button>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow key={1}>
-              <TableCell>Original Url</TableCell>
-              <TableCell>Short Url</TableCell>
-              <TableCell>Visited</TableCell>
-              <TableCell>Shortned Attempted</TableCell>
+              <TableCell sx={{ fontWeight: "600" }}>Original Url</TableCell>
+              <TableCell sx={{ fontWeight: "600" }}>Short Url</TableCell>
+              <TableCell sx={{ fontWeight: "600" }}>Visited</TableCell>
+              <TableCell sx={{ fontWeight: "600" }}>
+                Shortned Attempted
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -59,9 +65,6 @@ export default function Stats(props) {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button onClick={handleBack} variant="contained" sx={{ mt: 3 }}>
-        Back
-      </Button>
     </React.Fragment>
   );
 }

@@ -7,7 +7,7 @@ export const isURLValid = async (newUrl) => {
     return new Promise((resolve, reject) => {
       urlExists(newUrl, (err, exists) => {
         if (exists) resolve(exists);
-        else reject("Invalid url");
+        else reject("Invalid url. Kindly check the format.");
       });
     });
   } catch (error) {

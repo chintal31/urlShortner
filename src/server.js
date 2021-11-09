@@ -17,10 +17,6 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "../urlShortnerReact/build")));
 
 app.get("/", (req, res) => {
-  console.log(
-    "__dirname",
-    path.join(__dirname, ".", "urlShortnerReact/build/index.html")
-  );
   res.sendFile(path.join(__dirname, ".", "urlShortnerReact/build/index.html"));
 });
 

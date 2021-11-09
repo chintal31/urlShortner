@@ -15,9 +15,11 @@ export default function Form(props) {
     >
       <TextField
         required
+        error={props.shortUrlFailed}
+        helperText={props.shortUrlFailed ? `${props.shortUrlFailed}` : ""}
         id="outlined-required"
         name="url"
-        label="Enter your url here"
+        label="https://yourwebsite.com"
         fullWidth
         defaultValue=""
         onKeyPress={props.removePrevError}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import DisplayStats from "./stats.js";
 import Form from "./form.js";
 import { shortUrl, fetchAllUrls } from "../api";
@@ -40,22 +39,10 @@ export default function Main() {
           onSubmit={handleSubmit}
           showStats={displayStats}
           removePrevError={removePrevError}
+          shortUrlFailed={shortUrlFailed}
         />
       ) : (
         <DisplayStats stats={urls} showForm={showForm} />
-      )}
-      {shortUrlFailed ? (
-        <Typography
-          variant="h6"
-          sx={{
-            p: 2,
-            color: "red",
-          }}
-        >
-          {shortUrlFailed}
-        </Typography>
-      ) : (
-        ""
       )}
     </Box>
   );
