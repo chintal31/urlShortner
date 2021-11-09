@@ -45,14 +45,17 @@ export const getKey = async (shortUrl) => {
   try {
     let urls = await hgetAllAsync("urls");
     if (urls) {
-      return Object.keys(urls).find(async (key) => {
-        let urlProp = JSON.parse(urls[key]);
+      let origUrls = Object.keys(urls),
+        originalUrl;
+      for (let origUrl of origUrls) {
+        let urlProp = JSON.parse(urls[origUrl]);
         if (urlProp.short_url === shortUrl) {
           urlProp.visited++;
-          await hsetAsync("urls", key, JSON.stringify(urlProp));
-          return urlProp.short_url === shortUrl;
+          await hsetAsync("urls", origUrl, JSON.stringify(urlProp));
+          originalUrl = origUrl;
         }
-      });
+      }
+      return originalUrl;
     } else {
       return null;
     }
