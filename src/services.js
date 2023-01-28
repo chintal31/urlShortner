@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { hgetAllAsync, hsetAsync, hgetAsync, deleteAll } from "./redis_config";
+import { client } from "./redis_config";
 import urlExists from "url-exists";
 
 export const isURLValid = async (newUrl) => {
@@ -18,7 +18,7 @@ export const isURLValid = async (newUrl) => {
 
 export const addUrl = async (newUrl) => {
   try {
-    let urlExists = await hgetAsync("urls", newUrl);
+    let urlExists = await client.hGet("urls", newUrl);
     let urlProp;
     if (urlExists) {
       urlProp = JSON.parse(urlExists);
@@ -31,8 +31,7 @@ export const addUrl = async (newUrl) => {
         shortenedAttempt: 1,
       };
     }
-    await hsetAsync("urls", newUrl, JSON.stringify(urlProp));
-    let urls = await hgetAllAsync("urls");
+    await client.hSet("urls", newUrl, JSON.stringify(urlProp));
     return urlProp;
   } catch (error) {
     console.log(`Error while adding url: ${error}`);
@@ -42,7 +41,7 @@ export const addUrl = async (newUrl) => {
 
 export const getKey = async (shortUrl) => {
   try {
-    let urls = await hgetAllAsync("urls");
+    let urls = await client.hGetAll("urls");
     if (urls) {
       let origUrls = Object.keys(urls),
         originalUrl;
@@ -50,7 +49,7 @@ export const getKey = async (shortUrl) => {
         let urlProp = JSON.parse(urls[origUrl]);
         if (urlProp.short_url === shortUrl) {
           urlProp.visited++;
-          await hsetAsync("urls", origUrl, JSON.stringify(urlProp));
+          await client.hSet("urls", origUrl, JSON.stringify(urlProp));
           originalUrl = origUrl;
         }
       }
@@ -66,8 +65,9 @@ export const getKey = async (shortUrl) => {
 
 export const clearRedis = async () => {
   try {
-    await deleteAll();
+    await client.del("urls");
   } catch (err) {
     console.log("Error while deleting keys from redis: ", err);
+    throw err;
   }
 };

@@ -1,7 +1,7 @@
 import { addUrl, isURLValid, clearRedis, getKey } from "./services";
-import { hgetAllAsync } from "./redis_config";
+import { client } from "./redis_config";
 
-export const UrlShortner = async (req, res) => {
+export const urlShortner = async (req, res) => {
   try {
     let { url } = req.body;
     if (!url) return res.status(404).json({ error: "URL required." });
@@ -30,7 +30,7 @@ export const redirectToOriginalUrl = async (req, res) => {
 
 export const fetchAllUrls = async (req, res) => {
   try {
-    let urls = await hgetAllAsync("urls");
+    let urls = await client.hGetAll("urls");
     urls = urls
       ? Object.entries(urls).map((urlArr) => {
           return { originalUrl: urlArr[0], ...JSON.parse(urlArr[1]) };
@@ -48,6 +48,6 @@ export const emptyRedis = async (req, res) => {
     res.json({ msg: "Deleted all data from redis" });
   } catch (err) {
     console.log(`Error in deleting data : ${err}`);
-    res.json({ err: " Error in deleting data." });
+    res.json({ err: " Error in deleting data. " + err });
   }
 };
