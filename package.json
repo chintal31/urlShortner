@@ -21,9 +21,11 @@
     "nodemon": "^2.0.14"
   },
   "scripts": {
+    "build": "babel ./src --out-dir ./build",
+    "build:clean": "rm -rf build",
+    "prebuild": "npm run build:clean",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
-    "heroku-postbuild": "babel -d ./build ./src && cd urlShortnerReact && npm install && npm run build",
     "start": "node ./build/server.js"
   },
   "repository": {
