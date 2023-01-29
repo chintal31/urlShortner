@@ -65,6 +65,8 @@ The following diagram depicts the architecture and application working.
   3. From the root directory run - `docker-compose up`
 
 - Without docker
+  
+  Prerequisite: Redis should be running locally on port 6379.
 
   1. Clone the repo
 
