@@ -8,7 +8,7 @@ import cors from "cors";
 import "./redis_config";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 //Parsing incoming requests JSON payload
 app.use(express.json());
