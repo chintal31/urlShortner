@@ -1,3 +1,7 @@
+## Live version
+
+- Live version of the app is deployed on Fly.io(https://url-shortner.fly.dev/)
+
 ## What is a URL Shortener Web App?
 
 - An URL Shortener is used to shorten long web address. In the web app, user
