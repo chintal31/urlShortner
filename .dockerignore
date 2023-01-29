@@ -1,0 +1,13 @@
+Dockerfile
+.dockerignore
+.gitignore
+node_modules
+npm-debug.log
+dist
+build
+# frontend
+frontend/.gitignore
+frontend/node_modules
+frontend/dist
+frontend/npm-debug.log
+frontend/build
