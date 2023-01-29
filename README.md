@@ -40,10 +40,38 @@ The following diagram depicts the architecture and application working.
 
 ### Possible improvements
 
-- Create a dockerized application
+- [x] Create a dockerized application
 
-- Automates Tests
+- [ ] Add hot reload using docker-volumes
 
-- Integrate CI/CD pipelines
+- [ ] Automated Tests
 
-- Logging
+- [ ] Integrate CI/CD pipelines
+
+- [ ] Logging
+
+### How to run locally
+
+- Recommended option using docker
+
+  1. Clone the repo
+
+  2. Add .env file
+
+  3. From the root directory run - `docker-compose up`
+
+- Without docker
+
+  1. Clone the repo
+
+  2. Add .env file
+
+  3. From the root directory run - `npm install`
+
+  4. Go to frontend directory - `cd frontend`
+
+  5. Inside frontend directory, run - `npm install && npm run build`
+
+  6. Back to root directory - `cd ..`
+
+  7. Run - `npm run dev`
