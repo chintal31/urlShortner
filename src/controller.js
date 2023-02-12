@@ -1,18 +1,31 @@
-import { addUrl, isURLValid, clearRedis, getKey } from "./services";
+import {
+  addUrl,
+  isURLValid,
+  clearRedis,
+  getKey,
+  URLNotFoundError,
+} from "./services";
 import { client } from "./redis_config";
 
 export const urlShortner = async (req, res) => {
+  console.log("Incoming request: ", req.body);
   try {
     let { url } = req.body;
     if (!url) return res.status(404).json({ error: "URL required." });
     let isValid = await isURLValid(url);
     if (isValid) {
       let addedUrl = await addUrl(url);
+      console.log(
+        `Request success, url: ${url} and ${JSON.stringify(addedUrl)}`
+      );
       res.status(200).json({ addedUrl });
     }
   } catch (err) {
-    console.log(`Error in urlShortner service: ${err}`);
-    return res.status(404).json({ err });
+    console.log(`Error in urlShortner, url - ${req.body.url} , err - ${err}`);
+    if (err.name == "URLNotFoundError") {
+      return res.status(404).json({ err: err.message });
+    }
+    return res.status(500).json({ err: err.message });
   }
 };
 

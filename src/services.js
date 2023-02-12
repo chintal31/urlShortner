@@ -1,18 +1,24 @@
 import { nanoid } from "nanoid";
 import { client } from "./redis_config";
-import urlExists from "url-exists";
+import axios from "axios";
 
 export const isURLValid = async (newUrl) => {
   try {
-    return new Promise((resolve, reject) => {
-      urlExists(newUrl, (err, exists) => {
-        if (exists) resolve(exists);
-        else reject("Invalid url. Kindly check the format.");
-      });
-    });
+    const res = await axios.get(newUrl);
+    return res.status === 200;
   } catch (error) {
-    console.log(`Error while checking url: ${error}`);
-    return false;
+    if (
+      error.toJSON().code === "ENOTFOUND" ||
+      error.toJSON().code === "ECONNREFUSED" ||
+      error.toJSON().code === "ETIMEDOUT"
+    ) {
+      console.log(`URLNotFoundError: ${newUrl}`);
+      throw new URLNotFoundError(`Cannot find the requested URL`);
+    }
+    console.log(
+      `Error while checking isURLValid: ${newUrl} - ${error.toJSON().message}`
+    );
+    throw new Error(error.toJSON().message);
   }
 };
 
@@ -35,7 +41,7 @@ export const addUrl = async (newUrl) => {
     return urlProp;
   } catch (error) {
     console.log(`Error while adding url: ${error}`);
-    throw error;
+    throw new Error(error.toJSON().message);
   }
 };
 
@@ -71,3 +77,10 @@ export const clearRedis = async () => {
     throw err;
   }
 };
+
+export class URLNotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "URLNotFoundError";
+  }
+}

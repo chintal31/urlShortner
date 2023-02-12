@@ -42,7 +42,11 @@ export default function Main() {
           shortUrlFailed={shortUrlFailed}
         />
       ) : (
-        <DisplayStats stats={urls} showForm={showForm} />
+        <DisplayStats
+          stats={urls}
+          showForm={showForm}
+          removePrevError={removePrevError}
+        />
       )}
     </Box>
   );

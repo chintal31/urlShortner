@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 
 export default function Stats(props) {
   function handleBack() {
+    props.removePrevError();
     props.showForm();
   }
   return (
