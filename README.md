@@ -1,7 +1,3 @@
-## Live version
-
-- Live version of the app is deployed on Fly.io(https://url-shortner.fly.dev/)
-
 ## What is a URL Shortener Web App?
 
 - An URL Shortener is used to shorten long web address. In the web app, user
@@ -44,15 +40,13 @@ The following diagram depicts the architecture and application working.
 
 ### Possible improvements
 
-- [x] Create a dockerized application
+- Add hot reload using docker-volumes
 
-- [ ] Add hot reload using docker-volumes
+- Automated Tests
 
-- [ ] Automated Tests
+- Integrate CI/CD pipelines
 
-- [ ] Integrate CI/CD pipelines
-
-- [ ] Logging
+- Logging
 
 ### How to run locally
 
